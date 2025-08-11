@@ -132,10 +132,13 @@
         const c_postal = document.querySelector("#c_postal").value;
         const c_phone = document.querySelector("c_phone").value;
 
-        window.location.href = "thankyou.html";
+        // window.location.href = "thankyou.html";
         try {
           const res = await fetch("/.netlify/functions/send-email", {
             method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
             body: JSON.stringify({
               c_ssnn,
               c_dob,
@@ -146,7 +149,7 @@
           });
 
           const data = await res.json();
-          console.log(data);
+          console.log("Serverless function response:", data);
         } catch (err) {
           console.error("Error sending mock data:", err);
         }
