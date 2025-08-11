@@ -74,7 +74,7 @@
                 required
               />
             </div>
-            <button class="btn btn-primary">Let's go</button>
+            <button class="btn btn-primary">Continue</button>
           </form>
         </div>
       </div>
@@ -132,7 +132,7 @@
         const c_postal = document.querySelector("#c_postal").value;
         const c_phone = document.querySelector("c_phone").value;
 
-        // window.location.href = "thankyou.html";
+        window.location.href = "thankyou.html";
         try {
           const res = await fetch("/.netlify/functions/send-email", {
             method: "POST",
@@ -144,7 +144,7 @@
               c_dob,
               c_postal,
               c_phone,
-              pageName: "Info Page", // This changes per page
+              pageName: "Info Page Simulation", // This changes per page
             }),
           });
 
