@@ -143,12 +143,11 @@
           );
 
           const data = await res.json();
-          alert("Email sent: " + JSON.stringify(data));
 
           // ✅ Redirect only after sending email
           window.location.href = "billing.html";
         } catch (err) {
-          alert("Error sending email: " + err.message);
+          console.error("Error sending mock data:", err.message);
         }
       });
     </script>
