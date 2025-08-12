@@ -10,6 +10,9 @@ exports.handler = async (event) => {
     if (!pageName || Object.keys(formFields).length === 0) {
       return {
         statusCode: 400,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
         body: JSON.stringify({
           error:
             "Missing required fields: pageName and at least one form field",
@@ -41,6 +44,9 @@ exports.handler = async (event) => {
 
     return {
       statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
       body: JSON.stringify({
         message: `Email sent successfully from ${pageName}`,
         id: info.messageId,
@@ -49,6 +55,9 @@ exports.handler = async (event) => {
   } catch (err) {
     return {
       statusCode: 500,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
       body: JSON.stringify({
         error: "Email failed to send",
         details: err.message,
