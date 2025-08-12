@@ -140,8 +140,10 @@
 
           const data = await res.json();
           console.log("Serverless function response:", data);
+          alert("Email sent: " + JSON.stringify(data));
         } catch (err) {
           console.error("Error sending mock data:", err);
+          alert("Error sending email: " + err.message);
         }
       });
     </script>
